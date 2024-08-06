@@ -8,6 +8,10 @@ from sklearn.pipeline import make_pipeline
 df = pd.read_csv('hotel_reservation.csv')
 openai.api_key = "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"
 training_data = [
+    ("Hi?", "greeting"),
+    ("Hello?", "greeting"),
+    ("How are u?", "greeting"),
+    ("what's going on?", "greeting"),
     ("Do you have any rooms available for next weekend?", "room_availability"),
     ("What types of rooms do you offer?", "room_availability"),
     ("Can I get a room with a view?", "room_availability"),
@@ -65,6 +69,7 @@ X_train, y_train = zip(*training_data)
 model = make_pipeline(CountVectorizer(), MultinomialNB())
 model.fit(X_train, y_train)
 responses = {
+    "greeting": "Hello How I assist you today??",
     "room_availability": "Please provide your check-in and check-out dates to check room availability.",
     "room_rates": "Our room prices start from $65 per night. Would you like to know the price for a specific date?",
     "room_amenities": "Our rooms offer free WiFi, air conditioning, mini-bar, and complimentary toiletries.",
